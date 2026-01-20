@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A–Z Flip Grid</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+    .card { perspective: 1000px; cursor: pointer; }
+    .card-inner {
+      position: relative; width: 100px; height: 140px;
+      transition: transform 0.8s; transform-style: preserve-3d;
+    }
+    .card.flip .card-inner { transform: rotateY(180deg); }
+    .card-front, .card-back {
+      position: absolute; width: 100%; height: 100%;
+      backface-visibility: hidden; border-radius: 10px;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 2em; color: white;
+      flex-direction: column; padding: 5px; box-sizing: border-box;
+    }
+    .card-front { background-color: #3498db; }
+    .card-back { background-color: #2ecc71; transform: rotateY(180deg); }
+    .card-back img { width: 80%; height: auto; margin-bottom: 5px; border-radius: 5px; }
+    .card-back p { font-size: 1em; color: #fff; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // ============================
+    // EDIT ONLY THIS ARRAY
+    // Replace "images/a.jpg" etc with your images
+    // Replace "Text for A" with your text
+    // ============================
+    const cardsData = [
+      { letter: 'A', image: 'images/a.png', text: 'A is for Art' },
+      { letter: 'B', image: 'images/b.jpg', text: 'Text for B' },
+      { letter: 'C', image: 'images/c.jpg', text: 'Text for C' },
+      { letter: 'D', image: 'images/d.jpg', text: 'Text for D' },
+      { letter: 'E', image: 'images/e.jpg', text: 'Text for E' },
+      { letter: 'F', image: 'images/f.jpg', text: 'Text for F' },
+      { letter: 'G', image: 'images/g.jpg', text: 'Text for G' },
+      { letter: 'H', image: 'images/h.jpg', text: 'Text for H' },
+      { letter: 'I', image: 'images/i.jpg', text: 'Text for I' },
+      { letter: 'J', image: 'images/j.jpg', text: 'Text for J' },
+      { letter: 'K', image: 'images/k.jpg', text: 'Text for K' },
+      { letter: 'L', image: 'images/l.jpg', text: 'Text for L' },
+      { letter: 'M', image: 'images/m.jpg', text: 'Text for M' },
+      { letter: 'N', image: 'images/n.jpg', text: 'Text for N' },
+      { letter: 'O', image: 'images/o.jpg', text: 'Text for O' },
+      { letter: 'P', image: 'images/p.jpg', text: 'Text for P' },
+      { letter: 'Q', image: 'images/q.jpg', text: 'Text for Q' },
+      { letter: 'R', image: 'images/r.jpg', text: 'Text for R' },
+      { letter: 'S', image: 'images/s.jpg', text: 'Text for S' },
+      { letter: 'T', image: 'images/t.jpg', text: 'Text for T' },
+      { letter: 'U', image: 'images/u.jpg', text: 'Text for U' },
+      { letter: 'V', image: 'images/v.jpg', text: 'Text for V' },
+      { letter: 'W', image: 'images/w.jpg', text: 'Text for W' },
+      { letter: 'X', image: 'images/x.jpg', text: 'Text for X' },
+      { letter: 'Y', image: 'images/y.jpg', text: 'Text for Y' },
+      { letter: 'Z', image: 'images/z.jpg', text: 'Text for Z' }
+    ];
+
+    const grid = document.getElementById('grid');
+
+    cardsData.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front">${item.letter}</div>
+          <div class="card-back">
+            <img src="${item.image}" alt="${item.letter}">
+            <p>${item.text}</p>
+          </div>
+        </div>
+      `;
+      card.addEventListener('click', () => card.classList.toggle('flip'));
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
